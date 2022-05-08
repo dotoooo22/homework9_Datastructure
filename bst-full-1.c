@@ -202,7 +202,57 @@ int freeBST(Node* head)
 }
 int deleteLeafNode(Node* head, int key)
 {
-	
+	if (head == NULL) {	//아무것도없어서 삭제할게없음
+		printf("\n Nothing to delete!!\n");
+		return -1;
+	}
+
+	if (head->left == NULL) {	//헤드만있어서 삭제할게없음
+		printf("\n Nothing to delete!!\n");
+		return -1;
+	}
+
+	Node* ptr = head->left;	//ptr에 첫번째노드
+
+
+	Node* parentNode = head;	//부모에 헤드
+
+	while(ptr != NULL) {
+
+		if(ptr->key == key) {	//키값찾으면
+			if(ptr->left == NULL && ptr->right == NULL) {		//왼쪽오른쪽 둘다 널이면
+
+				if(parentNode == head)	//부모가 헤드면 왼쪽(첫번째거) 널
+					head->left = NULL;
+
+				if(parentNode->left == ptr)	//부모의 왼쪽이 ptr이면 왼쪽을 끊고
+					parentNode->left = NULL;	
+				else						//아니면 오른쪽을 끊기
+					parentNode->right = NULL;
+
+				free(ptr);	//ptr메모리해제
+			}
+			else {		//key가 중간에 있어서 leaf가 아님
+				printf("the node [%d] is not a leaf \n", ptr->key);
+			}
+			return 1;
+		}
+
+
+		parentNode = ptr;		//부모를 ptr로
+
+		
+		if(ptr->key < key)		//찾는키가 현재노드키보다 크면오른쪽으로 아니면 왼쪽으로 이동
+			ptr = ptr->right;
+		else
+			ptr = ptr->left;
+
+
+	}
+	//키못찾음
+	printf("Cannot find the node for key [%d]\n ", key);
+
+	return 1;
 }
 
 Node* searchRecursive(Node* ptr, int key)
