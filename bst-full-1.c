@@ -11,22 +11,23 @@ typedef struct node {
 
 int initializeBST(Node** h);
 
-void inorderTraversal(Node* ptr);	  // ì¤‘ìœ„ìˆœíšŒí•˜ë©´ì„œ ì¶œë ¥
-void preorderTraversal(Node* ptr);    // ì „ìœ„ìˆœíšŒí•˜ë©´ì„œ ì¶œë ¥
-void postorderTraversal(Node* ptr);	  //í›„ìœ„ìˆœíšŒ
-int insert(Node* head, int key);  //ë…¸ë“œì‚½ì…
+void inorderTraversal(Node* ptr);	  // ÁßÀ§¼øÈ¸ÇÏ¸é¼­ Ãâ·Â
+void preorderTraversal(Node* ptr);    // ÀüÀ§¼øÈ¸ÇÏ¸é¼­ Ãâ·Â
+void postorderTraversal(Node* ptr);	  //ÈÄÀ§¼øÈ¸
+int insert(Node* head, int key);  //³ëµå»ğÀÔ
 
-int freeBST(Node* head); //ëª¨ë“ ë©”ëª¨ë¦¬ì‚­ì œ
-Node* searchRecursive(Node* ptr, int key);  	//ì¬ê·€ë¡œ ì°¾ê¸°
-Node* searchIterative(Node* head, int key);  //ì¬ê·€ì•„ë‹Œê±¸ë¡œì°¾ê¸°
+int freeBST(Node* head); //¸ğµç¸Ş¸ğ¸®»èÁ¦
+Node* searchRecursive(Node* ptr, int key);  	//Àç±Í·Î Ã£±â
+Node* searchIterative(Node* head, int key);  //Àç±Í¾Æ´Ñ°É·ÎÃ£±â
 
-int deleteLeafNode(Node* head, int key);  // ë…¸ë“œì‚­ì œ
+int deleteLeafNode(Node* head, int key);  // ³ëµå»èÁ¦
 int main()
 {
 	char command;
 	int key;
 	Node* head = NULL;
 	Node* ptr = NULL;
+	printf("[----- [°û¹ÎÁ¤] [2021041021] -----]\n");
 
 	do{
 		printf("\n\n");
@@ -100,10 +101,10 @@ int main()
 
 int initializeBST(Node** h) {
 
-	if(*h != NULL)		//íŠ¸ë¦¬ê°€ ë¹„ì–´ìˆìœ¼ë©´ ë©”ëª¨ë¦¬ í•´ì œ
+	if(*h != NULL)		//Æ®¸®°¡ ºñ¾îÀÖÀ¸¸é ¸Ş¸ğ¸® ÇØÁ¦
 		freeBST(*h);
 
-	*h = (Node*)malloc(sizeof(Node));		//í—¤ë“œë…¸ë“œ í• ë‹¹
+	*h = (Node*)malloc(sizeof(Node));		//Çìµå³ëµå ÇÒ´ç
 	(*h)->left = NULL;	/* root */
 	(*h)->right = *h;
 	(*h)->key = -9999;
@@ -115,60 +116,60 @@ int initializeBST(Node** h) {
 void inorderTraversal(Node* ptr)
 {
 	if(ptr) {
-		inorderTraversal(ptr->left);	//ì™¼ìª½ëê¹Œì§€ ê°€ì„œ 
-		printf(" [%d] ", ptr->key);		//í‚¤ì¶œë ¥í•˜ê³ 
-		inorderTraversal(ptr->right);	//ì˜¤ë¥¸ìª½ê°€ê³ 
+		inorderTraversal(ptr->left);	//¿ŞÂÊ³¡±îÁö °¡¼­ 
+		printf(" [%d] ", ptr->key);		//Å°Ãâ·ÂÇÏ°í
+		inorderTraversal(ptr->right);	//¿À¸¥ÂÊ°¡°í
 	}
 }
 
 void preorderTraversal(Node* ptr)
 {
 	if(ptr) {
-		printf(" [%d] ", ptr->key);	//í‚¤ì¶œë ¥í•˜ê³ 
-		preorderTraversal(ptr->left);	//ì™¼ìª½ìœ¼ë¡œ ê³„ì™ë“¤ì–´ê°
-		preorderTraversal(ptr->right);	//ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì˜¬ë¼ì˜¤ê¸°
+		printf(" [%d] ", ptr->key);	//Å°Ãâ·ÂÇÏ°í
+		preorderTraversal(ptr->left);	//¿ŞÂÊÀ¸·Î °è½ïµé¾î°¨
+		preorderTraversal(ptr->right);	//¿À¸¥ÂÊÀ¸·Î ¿Ã¶ó¿À±â
 	}
 }
 
 void postorderTraversal(Node* ptr)
 {
 	if(ptr) {	
-		postorderTraversal(ptr->left);		//ì™¼ìª½ëê°€ì§€ê°€ì„œ
-		postorderTraversal(ptr->right);		//ì˜¤ë¥¸ìª½ë„ ë“¤ì–´ê°€
-		printf(" [%d] ", ptr->key);		//ì¶œë ¥
+		postorderTraversal(ptr->left);		//¿ŞÂÊ³¡°¡Áö°¡¼­
+		postorderTraversal(ptr->right);		//¿À¸¥ÂÊµµ µé¾î°¡
+		printf(" [%d] ", ptr->key);		//Ãâ·Â
 	}
 }
 
 
 int insert(Node* head, int key)
 {
-	Node* newNode = (Node*)malloc(sizeof(Node));		//ë…¸ë“œë¥¼ í•˜ë‚˜ í• ë‹¹ë°›ê³ 
+	Node* newNode = (Node*)malloc(sizeof(Node));		//³ëµå¸¦ ÇÏ³ª ÇÒ´ç¹Ş°í
 	newNode->key = key;
 	newNode->left = NULL;
 	newNode->right = NULL;
 
-	if (head->left == NULL) {	//ì²«ë²ˆì§¸ ì™¼ìª½ë¹„ì–´ìˆìœ¼ë©´ ì™¼ìª½ì— ë„£ê¸°
+	if (head->left == NULL) {	//Ã¹¹øÂ° ¿ŞÂÊºñ¾îÀÖÀ¸¸é ¿ŞÂÊ¿¡ ³Ö±â
 		head->left = newNode;
 		return 1;
 	}
 
 	Node* ptr = head->left;
 
-	Node* parentNode = NULL;	//ë¶€ëª¨ë…¸ë“œ	
+	Node* parentNode = NULL;	//ºÎ¸ğ³ëµå	
 
-	while(ptr != NULL) {	//ë¹ˆê³³ê¹Œì§€
+	while(ptr != NULL) {	//ºó°÷±îÁö
 
-		if(ptr->key == key) return 1;	//keyê°€ ì´ë¯¸ ìˆìœ¼ë©´ ê·¸ëƒ¥ ë¦¬í„´
+		if(ptr->key == key) return 1;	//key°¡ ÀÌ¹Ì ÀÖÀ¸¸é ±×³É ¸®ÅÏ
 
-		parentNode = ptr;	//ë¶€ëª¨ì— ptrì„ë„£ê³ 
+		parentNode = ptr;	//ºÎ¸ğ¿¡ ptrÀ»³Ö°í
 
-		if(ptr->key < key)	//ë¶€ëª¨í‚¤ë³´ë‹¤ í¬ë©´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì•„ë‹ˆë©´ ì™¼ìª½ìœ¼ë¡œ ì´ë™
+		if(ptr->key < key)	//ºÎ¸ğÅ°º¸´Ù Å©¸é ¿À¸¥ÂÊÀ¸·Î ¾Æ´Ï¸é ¿ŞÂÊÀ¸·Î ÀÌµ¿
 			ptr = ptr->right;
 		else
 			ptr = ptr->left;
 	}
 
-	if(parentNode->key > key)		//ë¶€ëª¨ë…¸ë“œë³´ë‹¤ ì‘ìœ¼ë©´ ì™¼ìª½ ì•„ë‹ˆë©´ ì˜¤ë¥¸ìª½ì— ì‚½ì…
+	if(parentNode->key > key)		//ºÎ¸ğ³ëµåº¸´Ù ÀÛÀ¸¸é ¿ŞÂÊ ¾Æ´Ï¸é ¿À¸¥ÂÊ¿¡ »ğÀÔ
 		parentNode->left = newNode;
 	else
 		parentNode->right = newNode;
@@ -178,78 +179,78 @@ int insert(Node* head, int key)
 void freeNode(Node* ptr)
 {
 	if(ptr) {
-		freeNode(ptr->left);		//ì™¼ìª½ë“¤ì–´ê°€ì„œ ë‹¤ í•´ì œ
-		freeNode(ptr->right);		//ì˜¤ë¥¸ìª½ë“¤ì–´ê°€ì„œ ë‹¤ í•´ì œ
-		free(ptr);		//ptrí•´ì œ
+		freeNode(ptr->left);		//¿ŞÂÊµé¾î°¡¼­ ´Ù ÇØÁ¦
+		freeNode(ptr->right);		//¿À¸¥ÂÊµé¾î°¡¼­ ´Ù ÇØÁ¦
+		free(ptr);		//ptrÇØÁ¦
 	}
 }
 
 int freeBST(Node* head)
 {
 
-	if(head->left == head)	//í—¤ë“œë§Œìˆìœ¼ë©´ í—¤ë“œë§Œ í•´ì œí•˜ê³  ë¦¬í„´
+	if(head->left == head)	//Çìµå¸¸ÀÖÀ¸¸é Çìµå¸¸ ÇØÁ¦ÇÏ°í ¸®ÅÏ
 	{
 		free(head);
 		return 1;
 	}
 
-	Node* p = head->left;	//ì™¼ìª½ë„£ê³ 
+	Node* p = head->left;	//¿ŞÂÊ³Ö°í
 
-	freeNode(p);	//pë…¸ë“œí•´ì œ
+	freeNode(p);	//p³ëµåÇØÁ¦
 
-	free(head);	//í—¤ë“œí•´ì œ
+	free(head);	//ÇìµåÇØÁ¦
 	return 1;
 }
 int deleteLeafNode(Node* head, int key)
 {
-	if (head == NULL) {	//ì•„ë¬´ê²ƒë„ì—†ì–´ì„œ ì‚­ì œí• ê²Œì—†ìŒ
+	if (head == NULL) {	//¾Æ¹«°Íµµ¾ø¾î¼­ »èÁ¦ÇÒ°Ô¾øÀ½
 		printf("\n Nothing to delete!!\n");
 		return -1;
 	}
 
-	if (head->left == NULL) {	//í—¤ë“œë§Œìˆì–´ì„œ ì‚­ì œí• ê²Œì—†ìŒ
+	if (head->left == NULL) {	//Çìµå¸¸ÀÖ¾î¼­ »èÁ¦ÇÒ°Ô¾øÀ½
 		printf("\n Nothing to delete!!\n");
 		return -1;
 	}
 
-	Node* ptr = head->left;	//ptrì— ì²«ë²ˆì§¸ë…¸ë“œ
+	Node* ptr = head->left;	//ptr¿¡ Ã¹¹øÂ°³ëµå
 
 
-	Node* parentNode = head;	//ë¶€ëª¨ì— í—¤ë“œ
+	Node* parentNode = head;	//ºÎ¸ğ¿¡ Çìµå
 
 	while(ptr != NULL) {
 
-		if(ptr->key == key) {	//í‚¤ê°’ì°¾ìœ¼ë©´
-			if(ptr->left == NULL && ptr->right == NULL) {		//ì™¼ìª½ì˜¤ë¥¸ìª½ ë‘˜ë‹¤ ë„ì´ë©´
+		if(ptr->key == key) {	//Å°°ªÃ£À¸¸é
+			if(ptr->left == NULL && ptr->right == NULL) {		//¿ŞÂÊ¿À¸¥ÂÊ µÑ´Ù ³ÎÀÌ¸é
 
-				if(parentNode == head)	//ë¶€ëª¨ê°€ í—¤ë“œë©´ ì™¼ìª½(ì²«ë²ˆì§¸ê±°) ë„
+				if(parentNode == head)	//ºÎ¸ğ°¡ Çìµå¸é ¿ŞÂÊ(Ã¹¹øÂ°°Å) ³Î
 					head->left = NULL;
 
-				if(parentNode->left == ptr)	//ë¶€ëª¨ì˜ ì™¼ìª½ì´ ptrì´ë©´ ì™¼ìª½ì„ ëŠê³ 
+				if(parentNode->left == ptr)	//ºÎ¸ğÀÇ ¿ŞÂÊÀÌ ptrÀÌ¸é ¿ŞÂÊÀ» ²÷°í
 					parentNode->left = NULL;	
-				else						//ì•„ë‹ˆë©´ ì˜¤ë¥¸ìª½ì„ ëŠê¸°
+				else						//¾Æ´Ï¸é ¿À¸¥ÂÊÀ» ²÷±â
 					parentNode->right = NULL;
 
-				free(ptr);	//ptrë©”ëª¨ë¦¬í•´ì œ
+				free(ptr);	//ptr¸Ş¸ğ¸®ÇØÁ¦
 			}
-			else {		//keyê°€ ì¤‘ê°„ì— ìˆì–´ì„œ leafê°€ ì•„ë‹˜
+			else {		//key°¡ Áß°£¿¡ ÀÖ¾î¼­ leaf°¡ ¾Æ´Ô
 				printf("the node [%d] is not a leaf \n", ptr->key);
 			}
 			return 1;
 		}
 
 
-		parentNode = ptr;		//ë¶€ëª¨ë¥¼ ptrë¡œ
+		parentNode = ptr;		//ºÎ¸ğ¸¦ ptr·Î
 
 		
-		if(ptr->key < key)		//ì°¾ëŠ”í‚¤ê°€ í˜„ì¬ë…¸ë“œí‚¤ë³´ë‹¤ í¬ë©´ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì•„ë‹ˆë©´ ì™¼ìª½ìœ¼ë¡œ ì´ë™
+		if(ptr->key < key)		//Ã£´ÂÅ°°¡ ÇöÀç³ëµåÅ°º¸´Ù Å©¸é¿À¸¥ÂÊÀ¸·Î ¾Æ´Ï¸é ¿ŞÂÊÀ¸·Î ÀÌµ¿
 			ptr = ptr->right;
 		else
 			ptr = ptr->left;
 
 
 	}
-	//í‚¤ëª»ì°¾ìŒ
+	//Å°¸øÃ£À½
 	printf("Cannot find the node for key [%d]\n ", key);
 
 	return 1;
@@ -257,10 +258,32 @@ int deleteLeafNode(Node* head, int key)
 
 Node* searchRecursive(Node* ptr, int key)
 {
-	
+	if(ptr == NULL)	//ptr³ÎÀÌ¸é ³Î ¸®ÅÏ
+		return NULL;
+
+	if(ptr->key < key)	//Ã£´Â Å°°¡ ´õ Å©¸é ¿À¸¥ÂÊ ¶Ç È£Ãâ
+		ptr = searchRecursive(ptr->right, key);
+	else if(ptr->key > key)
+		ptr = searchRecursive(ptr->left, key);
+
+	return ptr;//ÀÛÁöµµÅ©Áöµµ ¾ÊÀ»¶§(°°À»¶§)¸®ÅÏ
 
 }
+
 Node* searchIterative(Node* head, int key)
 {
-	
+	Node* ptr = head->left;	//ptr¿¡ Ã¹³ëµå³Ö±â
+
+	while(ptr != NULL)		//³¡±îÁö
+	{
+		if(ptr->key == key)	//Å°°¡ °°Àº ³ëµå ¸®ÅÏ
+			return ptr;
+
+		if(ptr->key < key)	//Ã£´Â Å°°¡ ´õ Å©¸é ptr ¿¡ ¿À¸¥ÂÊ ³Ö°í ¾Æ´Ï¸é ¿ŞÂÊÀ» ³ÖÀ½
+			ptr = ptr->right;	
+		else
+			ptr = ptr->left;
+	}
+
+	return NULL;		//¸øÃ£À¸¸é NULL¸®ÅÏ
 }
